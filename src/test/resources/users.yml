@@ -1,0 +1,38 @@
+---
+users: 
+  - 
+    fullName: "Krishna T"
+    password: krish@123
+    shortName: Krish
+    userType: SUPPORT
+    username: krish.t@wipro.com
+  - 
+    fullName: "Ramesh B"
+    password: ramesh.b@123
+    shortName: Ramesh
+    userType: CUSTOMER
+    username: ramesh.b@ibm.com
+  - 
+    fullName: "Manoj PVN"
+    password: manoj@123
+    shortName: Manoj
+    userType: SUPPORT
+    username: manoj.pvn@tesco.com
+  - 
+    fullName: "Swath A"
+    password: swathi@123
+    shortName: Swathi
+    userType: CUSTOMER
+    username: swathi.a@uhgc.com
+  - 
+    fullName: "Vishal P"
+    password: vishal@123
+    shortName: Vishal
+    userType: CUSTOMER
+    username: vishal.p@hcl.com
+  - 
+    fullName: "Suresh P"
+    password: suresh@123
+    shortName: Suresh
+    userType: SUPPORT
+    username: suresh.p@wipro.com
