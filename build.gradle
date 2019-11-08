@@ -19,19 +19,23 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
+	 mavenLocal()
+     maven { url archivaUrl }
+	 mavenCentral()
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.modelmapper:modelmapper:2.3.2'
     implementation 'org.yaml:snakeyaml:1.8'
  	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.1'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compile('com.heraizen:xsltopdf-lib:0.1.0-RELEASE')
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -40,4 +44,8 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+dependencyManagement {
+    applyMavenExclusions = false
 }

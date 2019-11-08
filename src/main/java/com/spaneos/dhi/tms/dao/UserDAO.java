@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.spaneos.dhi.tms.domain.User;
 import com.spaneos.dhi.tms.domain.UserStatus;
 
@@ -18,5 +21,6 @@ public interface UserDAO {
 	public Optional<User> findByUserName(String userName);
 	public List<User> registerUsers(List<User> users);
 	public List<User> getUserByStatus(UserStatus userStatus);
+	public Page<User> findAll(Pageable pageable);
 	
 }

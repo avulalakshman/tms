@@ -1,15 +1,19 @@
 package com.spaneos.dhi.tms.service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -18,6 +22,7 @@ import com.spaneos.dhi.tms.dao.UserDAO;
 import com.spaneos.dhi.tms.domain.User;
 import com.spaneos.dhi.tms.domain.UserStatus;
 import com.spaneos.dhi.tms.dto.UserDTO;
+import com.spaneos.dhi.tms.repo.UserRepo;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,7 +41,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO register(UserDTO userDto) throws AlreadyUserExistsException {
+	public UserDTO registerUser(UserDTO userDto) throws AlreadyUserExistsException {
 		Assert.notNull(userDto, "User dto can't be null");
 		Assert.notNull(userDto.getUsername(), "Username or email can't be empty or null");
 
@@ -63,24 +68,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<UserDTO> userById(String id) {
+	public Optional<UserDTO> findUserById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean deleteUser(String id) {
+	public boolean deactivateUser(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public List<UserDTO> allUsers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 
 	@Override
 	public List<UserDTO> search(Predicate<Boolean> search) {
@@ -90,14 +87,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDTO> registerUsers(List<UserDTO> usersDto) {
-		// TODO check before adding user
-		List<User> users = usersDto.stream()
-				                   .map(dto -> modelMapper.map(dto, User.class))
-				                   .collect(Collectors.toList());
+		List<User> users = usersDto.stream().map(dto -> modelMapper.map(dto, User.class)).collect(toList());
 		users = userDao.registerUsers(users);
-		usersDto = users.stream()
-				        .map(user -> modelMapper.map(user, UserDTO.class))
-				        .collect(Collectors.toList());
+		usersDto = users.stream().map(user -> modelMapper.map(user, UserDTO.class)).collect(toList());
 		return usersDto;
 	}
 
@@ -117,9 +109,26 @@ public class UserServiceImpl implements UserService {
 	public List<UserDTO> getUserByStatus(UserStatus userStatus) {
 		Assert.notNull(userStatus, "User status can't be null");
 		List<User> userList = userDao.getUserByStatus(userStatus);
-		return userList.stream()
-				.map(user->modelMapper.map(user, UserDTO.class))
-				.collect(Collectors.toList());
+		return userList.stream().map(user -> modelMapper.map(user, UserDTO.class)).collect(toList());
+	}
+
+	@Override
+	public boolean approveUser(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<UserDTO> getAllActiveUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<UserDTO> findAll(Pageable pageable) {
+		Page<User> page = userDao.findAll(pageable);
+		Page<UserDTO> pageWithDto = page.map((user) -> modelMapper.map(user, UserDTO.class));
+		return pageWithDto; 
 	}
 
 }

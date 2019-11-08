@@ -22,7 +22,7 @@ public class UserController {
 	}
 	@PostMapping
 	public UserDTO registerUser(@RequestBody UserDTO userDTO) throws AlreadyUserExistsException {
-		userDTO = userService.register(userDTO);
+		userDTO = userService.registerUser(userDTO);
 		return userDTO;
 	}
 }

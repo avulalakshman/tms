@@ -20,11 +20,12 @@ public class Issue {
 		private String title;
 		private String description;
 		private String username;
-		private String shortName;
 		private String moduleName;
 		private List<String> tags;
 		private IssueStatus issueStatus;
-		private List<String> attachementId;
+		private List<String> attachementIds;
+		private List<IssueAction> issueActions;
+		
 		
 		@CreatedDate
 		private Instant createdDate;

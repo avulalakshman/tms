@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.spaneos.dhi.tms.domain.User;
@@ -65,6 +67,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<User> getUserByStatus(UserStatus userStatus) {
 		return userRepo.findByStatus(userStatus);
+	}
+
+	@Override
+	public Page<User> findAll(Pageable pageable) {
+		return userRepo.findAll(pageable);
 	}
 
 }

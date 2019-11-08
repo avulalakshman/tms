@@ -13,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class User {
+	
 	@Id
 	private String id;
 	private String fullName;
@@ -20,7 +21,7 @@ public class User {
 	private String username;
 	private String password;
 	private UserStatus status;
-	private UserType userType;
+	private Role role;
 	
 	@CreatedDate
 	private Instant createdDate;
@@ -28,4 +29,5 @@ public class User {
 	private String lastModifiedUser;
 	@LastModifiedDate
 	private Instant lastModifiedDate;
+	
 }
