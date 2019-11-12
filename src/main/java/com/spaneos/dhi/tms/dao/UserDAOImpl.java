@@ -55,8 +55,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Optional<User> findByUserName(String userName) {
-		Optional<User> user = userRepo.findByUsername(userName);
-		return user;
+		return userRepo.findByUsername(userName);
 	}
 
 	@Override

@@ -5,8 +5,8 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -30,9 +29,11 @@ public class UserServiceImpl implements UserService {
 	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	private ModelMapper modelMapper;
 	private UserDAO userDao;
-
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private UserRepo userRepo;
+
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	public UserServiceImpl(ModelMapper modelMapper, UserDAO userDAO) {
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		User user = modelMapper.map(userDto, User.class);
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		//user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user = userDao.register(user);
 		LOG.info("User is added successfully with id:{}", user.getId());
 		userDto = modelMapper.map(user, UserDTO.class);
@@ -127,8 +128,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<UserDTO> findAll(Pageable pageable) {
 		Page<User> page = userDao.findAll(pageable);
-		Page<UserDTO> pageWithDto = page.map((user) -> modelMapper.map(user, UserDTO.class));
-		return pageWithDto; 
+		return page.map((user) -> modelMapper.map(user, UserDTO.class));
+	}
+
+	@Override
+	public List<UserDTO> findAll() {
+		return userRepo.findAll().stream().map(user->modelMapper.map(user, UserDTO.class)).collect(Collectors.toList());
+	
 	}
 
 }

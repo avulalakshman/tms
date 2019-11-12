@@ -14,6 +14,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 import com.spaneos.dhi.tms.dto.UserDTO;
+import com.spaneos.dhi.tms.repo.IssueAttachmentRepo;
 import com.spaneos.dhi.tms.repo.UserRepo;
 
 /**
@@ -55,6 +56,7 @@ public class SeedDataUtil {
 	
 	public void deleteAll() {
 		userRepo.deleteAll();
+	
 	}
 	
 

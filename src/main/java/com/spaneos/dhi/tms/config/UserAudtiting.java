@@ -10,7 +10,7 @@ public class UserAudtiting implements AuditorAware<String>{
 
     @Override
     public Optional<String> getCurrentAuditor() {
-    	//TODO needs to get user name from security context
+    	// needs to get user name from security context
         return Optional.of("admin");
     }
 

@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 
 import com.spaneos.dhi.tms.SeedDataUtil;
 import com.spaneos.dhi.tms.domain.UserStatus;
@@ -31,7 +33,8 @@ import com.spaneos.dhi.tms.user.service.BulkLoadUserServiceFactory;
 
 @SpringBootTest
 public class UserServiceSpec {
-    @Autowired
+   
+	@Autowired
     private SeedDataUtil seedDataUtil;
     @Autowired
     private BulkLoadUserServiceFactory loadUserFactory;
@@ -62,7 +65,7 @@ public class UserServiceSpec {
     @DisplayName("Registring multiple users on windows")
     @EnabledOnOs(OS.WINDOWS)
     void registerUsersWindows() {
-    	String filePath = this.getClass().getResource("/users.xlsx")
+    	String filePath = this.getClass().getResource("/users_mul.xlsx")
     			.getPath()
     			.toString()
     			.substring(1);
@@ -105,12 +108,26 @@ public class UserServiceSpec {
      	userService.registerUsers(users);
      	Pageable page = PageRequest.of(1, 2);
      	Page<UserDTO> retObject = userService.findAll(page);
+     	assertThat(retObject.getTotalElements()).isEqualTo(3);
+     	assertThat(retObject.getTotalPages()).isEqualTo(2);
+     	assertThat(retObject.getContent()).size().isEqualTo(2);
      	
-     	System.out.println(retObject.getTotalElements());
-     	System.out.println(retObject.getTotalPages());
-     	System.out.println(retObject.getContent().size());
      	
+    }
+    
+    @Test
+    @DisplayName("Find all users with pagination with sort")
+    void findAllWithPaginationWithSort() {
+    	String filePath = getExcelFilePath();
+    	List<UserDTO> users = loadUserFactory.getLoadUserService(()->FileType.EXCEL,filePath).loadUsers();
+     	userService.registerUsers(users);
+     	Pageable page = PageRequest.of(0, 10,Direction.ASC,"username");
+     	Page<UserDTO> retObject = userService.findAll(page);
+     	List<String> pageUserNames = retObject.getContent().stream().map(UserDTO::getUsername).collect(Collectors.toList());
+     	List<String> storedUserNames = users.stream().map(UserDTO::getUsername).sorted().collect(Collectors.toList());
      	
+     	assertThat(pageUserNames).containsSubsequence(storedUserNames);
+    
     }
     
     private String getExcelFilePath() {

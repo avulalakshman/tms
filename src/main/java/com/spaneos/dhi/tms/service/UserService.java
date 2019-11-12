@@ -27,6 +27,7 @@ public interface UserService {
 		public Map<UserStatus,Long> getUsersCountByStatus();
 		public Map<UserStatus,List<UserDTO>> getUsersByStatus();
 		public List<UserDTO> getUserByStatus(UserStatus userStatus);
+		public List<UserDTO> findAll();
 		
 		
 }
