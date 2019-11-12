@@ -1,0 +1,44 @@
+<select (change)="filterDataStatus($event.target.value)">
+
+  <option value="REGISTERED">REGISTERED</option>
+  <option value="REG_PENDING">REG_PENDING</option>
+  <option value="DEACTIVATED">DEACTIVATED</option>
+  
+</select>
+
+<select (change)="filterDataRole($event.target.value)">
+  
+  <option value="PS">PS</option>
+  <option value="ADMIN">ADMIN</option>
+  <option value="CLIENT">CLIENT</option>
+  
+</select>
+
+<button (click)="searchData()">Search</button>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+    <tr>
+      <th>Fullname</th>
+      <th>Username</th>
+      <th>Shortname</th>
+      <th>Status</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="persons?.length > 0 ">
+      <tr *ngFor="let person of persons">
+        <td>{{ person.fullName }}</td>
+        <td>{{ person.username }}</td>
+        <td>{{ person.shortName }}</td>
+        <td>{{ person.status }}</td>
+        <td>{{ person.role }}</td>
+      </tr>
+  </tbody>
+  <tbody *ngIf="persons?.length == 0">
+    <tr>
+      <td colspan="3" class="no-data-available">No data!</td>
+    </tr>
+  <tbody>
+</table>
+
+<router-outlet></router-outlet>
