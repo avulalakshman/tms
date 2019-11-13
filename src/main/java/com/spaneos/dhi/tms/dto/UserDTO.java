@@ -2,7 +2,6 @@ package com.spaneos.dhi.tms.dto;
 
 import java.time.Instant;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.spaneos.dhi.tms.domain.Role;
 import com.spaneos.dhi.tms.domain.UserStatus;
@@ -18,7 +17,6 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@XmlRootElement
 public class UserDTO {
 	private String id;
 	private String fullName;

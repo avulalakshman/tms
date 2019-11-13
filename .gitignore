@@ -1,9 +1,7 @@
-HELP.md
-.gradle
-build/
+.gradle/*
+/.gradle/*
+/build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**
-!**/src/test/**
 
 ### STS ###
 .apt_generated
@@ -12,25 +10,26 @@ build/
 .project
 .settings
 .springBeans
-.sts4-cache
+/bin/
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-out/
 
 ### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+/bin/
 
-### VS Code ###
-.vscode/
+/bin
+bin/
 
- .nb-gradle-properties
- /bin/
-/bin/*
+*/.meghanada/
+*~*
+*#*
