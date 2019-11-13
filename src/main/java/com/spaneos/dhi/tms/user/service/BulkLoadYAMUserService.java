@@ -9,19 +9,18 @@ public class BulkLoadYAMUserService implements BulkUserLoaderService {
 
 	public final Path path;
 
-	public BulkLoadYAMUserService(Path path) {
+	protected BulkLoadYAMUserService(Path path) {
 		this.path = path;
+	}
+	public static BulkUserLoaderService of(Path path) {
+		return new BulkLoadYAMUserService(path) ;
 	}
 
 	@Override
 	public List<UserDTO> loadUsers() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static BulkUserLoaderService of(Path path) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }
