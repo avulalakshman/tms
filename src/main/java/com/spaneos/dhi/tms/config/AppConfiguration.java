@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.spaneos.dhi.tms.user.service.BulkLoadUserServiceFactory;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class AppConfiguration {
@@ -23,6 +24,7 @@ public class AppConfiguration {
 	public BulkLoadUserServiceFactory loadUserFactory() {
 		return new BulkLoadUserServiceFactory();
 	}
+
 
 	
 }
