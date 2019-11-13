@@ -28,38 +28,23 @@ public class ExcelUserUtilTest {
 		public ExcelUserUtilTest(BulkLoadUserServiceFactory loadUserFactory) {
 			this.loadUserFactory = loadUserFactory;
 		}
+//		
+//		@Test
+//		@EnabledOnOs(OS.WINDOWS)
+//		void testFetchUsersFromExcelOnWindows() {
+//			String filePath = this.getClass().getResource("/users.xlsx").getPath().toString().substring(1);
+//			List<UserDTO> users = loadUserFactory.getLoadUserService(()->FileType.EXCEL,filePath).loadUsers();
+//	    	assertThat(users).size().isEqualTo(3);
+//		}
+//		@Test
+//		@EnabledOnOs(OS.WINDOWS)
+//		void testFetchUsersFromCSVOnWindows() {
+//			String filePath = this.getClass().getResource("/users.csv").getPath().toString().substring(1);
+//			List<UserDTO> users = loadUserFactory.getLoadUserService(()->FileType.CSV,filePath).loadUsers();
+//	    	assertThat(users).size().isEqualTo(3);
+//		}
 		
-		@Test
-		@EnabledOnOs(OS.WINDOWS)
-		void testFetchUsersFromExcelOnWindows() {
-			String filePath = this.getClass().getResource("/users.xlsx").getPath().toString().substring(1);
-			List<UserDTO> users = loadUserFactory.getLoadUserService(()->FileType.EXCEL,filePath).loadUsers();
-	    	assertThat(users).size().isEqualTo(3);
-		}
-		@Test
-		@EnabledOnOs(OS.WINDOWS)
-		void testFetchUsersFromCSVOnWindows() {
-			String filePath = this.getClass().getResource("/users.csv").getPath().toString().substring(1);
-			List<UserDTO> users = loadUserFactory.getLoadUserService(()->FileType.CSV,filePath).loadUsers();
-	    	assertThat(users).size().isEqualTo(3);
-		}
 		
-		@Test
-		@EnabledOnOs(OS.LINUX)
-		void testFetchUsersFromExcelOnLinux() {
-			String filePath = this.getClass().getResource("/users.xlsx").getPath().toString();
-			List<UserDTO> users = loadUserFactory.getLoadUserService(()->FileType.EXCEL,filePath).loadUsers();
-	    	
-			assertThat(users).size().isEqualTo(3);
-		}
-		@Test
-		@EnabledOnOs(OS.LINUX)
-		void testFetchUsersFromCsvOnLinux() {
-			String filePath = this.getClass().getResource("/users.csv").getPath().toString();
-			List<UserDTO> users = loadUserFactory.getLoadUserService(()->FileType.EXCEL,filePath).loadUsers();
-	    	
-			assertThat(users).size().isEqualTo(3);
-		}
 		
 		
 }

@@ -2,55 +2,56 @@ package com.spaneos.dhi.tms.dao;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import com.spaneos.dhi.tms.domain.User;
 import com.spaneos.dhi.tms.domain.UserStatus;
 import com.spaneos.dhi.tms.repo.UserRepo;
+
 @Repository
 public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	private UserRepo userRepo;
-	
+
 	@Override
 	public User register(User user) {
+		Assert.notNull(user, "User object can't be null");
 		return userRepo.save(user);
 	}
 
 	@Override
 	public User updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Assert.notNull(user, "User object can't be null");
+		Assert.notNull(user.getId(), "Updated user id can't be null");
+		return userRepo.save(user);
 	}
 
 	@Override
 	public Optional<User> userById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Assert.notNull(id, "Search user id can't be null");
+		return userRepo.findById(id);
 	}
 
 	@Override
 	public boolean deleteUser(String id) {
-		// TODO Auto-generated method stub
+		Assert.notNull(id, "Deleted user id can't be null");
+		Optional<User> optUser = userRepo.findById(id);
+		if (optUser.isPresent()) {
+			userRepo.delete(optUser.get());
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public List<User> allUsers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<User> search(Predicate<Boolean> search) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepo.findAll();
 	}
 
 	@Override
@@ -72,5 +73,4 @@ public class UserDAOImpl implements UserDAO {
 	public Page<User> findAll(Pageable pageable) {
 		return userRepo.findAll(pageable);
 	}
-
 }

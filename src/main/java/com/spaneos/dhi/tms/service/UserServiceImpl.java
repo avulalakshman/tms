@@ -88,6 +88,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDTO> registerUsers(List<UserDTO> usersDto) {
+		LOG.info("No of users are going to register:{}",usersDto.size());
 		List<User> users = usersDto.stream().map(dto -> modelMapper.map(dto, User.class)).collect(toList());
 		users = userDao.registerUsers(users);
 		usersDto = users.stream().map(user -> modelMapper.map(user, UserDTO.class)).collect(toList());

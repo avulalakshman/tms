@@ -1,22 +1,21 @@
 package com.spaneos.dhi.tms.user.service;
 
-import java.util.function.Supplier;
+import java.nio.file.Path;
+import java.util.function.Function;
 
 public class BulkLoadUserServiceFactory {
 
-	public BulkUserLoaderService getLoadUserService(Supplier<FileType> fileType, String filePath) {
-		switch (fileType.get()) {
+	public BulkUserLoaderService getLoadUserService(Function<Path,FileType> fileTypeProvider, Path path) {
+		switch (fileTypeProvider.apply(path)) {
 		case CSV:
-			return new BulkLoadCSVUserService(filePath);
+			return  BulkLoadCSVUserService.of(path);
 		case EXCEL:
-			return new BulkLoadExcelUserService(filePath);
+			return BulkLoadExcelUserService.of(path);
 		case YAML:
-			return new BulkLoadYAMUserService(filePath);
+			return BulkLoadYAMUserService.of(path);
 		default:
 			throw new IllegalArgumentException("File type is not a valid type");
 		}
 	}
-
-	
 
 }

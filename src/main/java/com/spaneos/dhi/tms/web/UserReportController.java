@@ -1,10 +1,10 @@
 package com.spaneos.dhi.tms.web;
 
-import javax.servlet.http.HttpServletRequest;
+import static com.spaneos.export.mongo.shared.DtsspMongoExportDetails.newDtsspMongoExportDetailsBuilderFor;
+
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.concurrent.SuccessCallback;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +15,6 @@ import com.spaneos.dtssp.mongodb.DtsspMongoDBFetchService;
 import com.spaneos.dtssp.output.DataTablesOutput;
 import com.spaneos.export.mongo.DtsspMongoExportService;
 import com.spaneos.export.mongo.shared.DtsspMongoExportDetails;
-import static com.spaneos.export.mongo.shared.DtsspMongoExportDetails.newDtsspMongoExportDetailsBuilderFor;
-
-import java.nio.file.Paths;
 
 @RestController
 public class UserReportController {
