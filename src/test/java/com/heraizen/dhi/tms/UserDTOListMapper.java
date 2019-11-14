@@ -1,6 +1,8 @@
-package com.spaneos.dhi.tms;
+package com.heraizen.dhi.tms;
 import java.util.List;
-import com.spaneos.dhi.tms.dto.UserDTO;
+
+import com.heraizen.dhi.tms.user.dto.UserDTO;
+
 import lombok.Getter;
 import lombok.Setter;
 

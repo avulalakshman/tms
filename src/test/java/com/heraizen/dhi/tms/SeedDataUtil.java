@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.spaneos.dhi.tms;
+package com.heraizen.dhi.tms;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -16,10 +16,9 @@ import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-import com.spaneos.dhi.tms.dto.UserDTO;
-import com.spaneos.dhi.tms.repo.IssueAttachmentRepo;
-import com.spaneos.dhi.tms.repo.UserRepo;
-import com.spaneos.dhi.tms.user.service.FileType;
+import com.heraizen.dhi.tms.user.dto.UserDTO;
+import com.heraizen.dhi.tms.user.repo.UserRepo;
+import com.heraizen.dhi.tms.user.service.FileType;
 
 /**
  *

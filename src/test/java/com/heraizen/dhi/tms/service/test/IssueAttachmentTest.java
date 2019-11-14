@@ -1,4 +1,4 @@
-package com.spaneos.dhi.tms.service.test;
+package com.heraizen.dhi.tms.service.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,8 +12,8 @@ import org.junit.jupiter.api.condition.OS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.spaneos.dhi.tms.repo.IssueAttachmentRepo;
-import com.spaneos.dhi.tms.service.UploadDocumentService;
+import com.heraizen.dhi.tms.service.UploadDocumentService;
+import com.heraizen.dhi.tms.user.repo.IssueAttachmentRepo;
 
 @SpringBootTest
 public class IssueAttachmentTest {

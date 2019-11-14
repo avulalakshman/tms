@@ -3,16 +3,11 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 }
-
-group = 'com.spaneos.pms'
+group = 'com.heraizen'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
-	developmentOnly
-	runtimeClasspath {
-		extendsFrom developmentOnly
-	}
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -28,7 +23,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.modelmapper:modelmapper:2.3.2'
     implementation 'org.yaml:snakeyaml:1.8'
@@ -38,10 +32,13 @@ dependencies {
 	
 	compile group: 'com.github.darrachequesne', name: 'spring-data-mongodb-datatables', version: '1.0.0'
  	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.1'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compile('com.heraizen:xsltopdf-lib:0.1.0-RELEASE')
+	
+	compileOnly 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -51,6 +48,3 @@ test {
 	useJUnitPlatform()
 }
 
-dependencyManagement {
-    applyMavenExclusions = false
-}

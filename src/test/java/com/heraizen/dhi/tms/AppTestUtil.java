@@ -1,4 +1,4 @@
-package com.spaneos.dhi.tms;
+package com.heraizen.dhi.tms;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 import org.springframework.core.io.ClassPathResource;
 
-import com.spaneos.dhi.tms.user.service.FileType;
+import com.heraizen.dhi.tms.user.service.FileType;
 
 public class AppTestUtil {
 	

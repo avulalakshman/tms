@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.spaneos.dhi.tms.service.test;
+package com.heraizen.dhi.tms.service.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,13 +28,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 
-import com.spaneos.dhi.tms.SeedDataUtil;
-import com.spaneos.dhi.tms.domain.UserStatus;
-import com.spaneos.dhi.tms.dto.UserDTO;
-import com.spaneos.dhi.tms.service.AlreadyUserExistsException;
-import com.spaneos.dhi.tms.service.UserService;
-import com.spaneos.dhi.tms.user.service.BulkLoadUserServiceFactory;
-import com.spaneos.dhi.tms.user.service.FileType;
+import com.heraizen.dhi.tms.SeedDataUtil;
+import com.heraizen.dhi.tms.domain.UserStatus;
+import com.heraizen.dhi.tms.service.AlreadyUserExistsException;
+import com.heraizen.dhi.tms.service.UserService;
+import com.heraizen.dhi.tms.user.dto.UserDTO;
+import com.heraizen.dhi.tms.user.service.BulkLoadUserServiceFactory;
+import com.heraizen.dhi.tms.user.service.FileType;
 
 @SpringBootTest
 public class UserServiceSpec {
