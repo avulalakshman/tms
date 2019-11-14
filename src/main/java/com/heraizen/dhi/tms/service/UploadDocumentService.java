@@ -1,16 +1,16 @@
 package com.heraizen.dhi.tms.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.heraizen.dhi.tms.domain.IssueAttachment;
 import com.heraizen.dhi.tms.user.repo.IssueAttachmentRepo;
@@ -22,32 +22,32 @@ public class UploadDocumentService {
 	@Autowired
 	private IssueAttachmentRepo issueAttachmentRepo;
 
-	public String uploadDocument(File file) {
-		byte[] data = null;
+	public Optional<String> uploadDocument(MultipartFile file) {
 		IssueAttachment obj = null;
 		try {
-			LOG.info("File details:{} and size :{}", file.getName(), file.length());
-			data = Files.readAllBytes(file.toPath());
+
 			IssueAttachment attachment = new IssueAttachment();
-			attachment.setAttchement(data);
+			attachment.setAttchement(file.getBytes());
 			obj = issueAttachmentRepo.save(attachment);
-			LOG.info("Attachment saved with id :{}", obj != null ? obj.getId() : " not saved");
+			LOG.info("Attachment saved with id :{}", obj.getId() != null ? toString() : " not saved");
 		} catch (IOException e) {
 			LOG.error("While uploading file:{}", e);
+			LOG.debug("Stack Trace: {}", e);
 
 		}
-		return obj != null ? obj.getId() : null;
+		return Optional.of(obj!=null?obj.getId():null);
 
 	}
 
-	public List<String> uploadMultiple(File directory) {
+	public List<String> uploadDocument(MultipartFile[] files) {
 		List<String> ids = null;
-		if (directory.isDirectory()) {
-			File[] list = directory.listFiles();
-			ids = Stream.of(list).map(e->uploadDocument(e)).collect(Collectors.toList());
-		} else {
-			throw new IllegalArgumentException("Given file is not a directory");
-		}
+		LOG.info("No of files requested to upload:{}", files.length);
+		ids = Arrays.asList(files).stream()
+				.map(this::uploadDocument)
+				.filter(e -> e.isPresent())
+				.map(e -> e.get())
+				.collect(Collectors.toList());
+		LOG.info("Total files uploaded successfully is :{}", ids.size());
 		return ids;
 	}
 }

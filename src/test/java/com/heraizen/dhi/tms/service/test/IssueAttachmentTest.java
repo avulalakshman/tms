@@ -29,14 +29,14 @@ public class IssueAttachmentTest {
 		@Test
 		public void addAttachment() {
 			File f = new File(this.getClass().getResource("/codedemo.png").getFile());
-			String id = uploadDocumentService.uploadDocument(f);
+			String id = null;//uploadDocumentService.uploadDocument(f);
 			System.out.println(id);
 			assertThat(id).isNotEmpty();
 		}
 		@Test
 		public void addAttachmentDirectory() {
 			File f = new File(this.getClass().getResource("/images").getFile());
-			 List<String> ids = uploadDocumentService.uploadMultiple(f);
+			 List<String> ids = null;//uploadDocumentService.uploadMultiple(f);
 			System.out.println(ids);
 			assertThat(ids).size().isEqualTo(3);
 		}

@@ -11,6 +11,7 @@ public class IssueAttachment {
 		
 		@Id
 		private String id;
+		private String titile;
 		private byte[] attchement;
 		
 		
