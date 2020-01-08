@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 @ComponentScan({"com.spaneos","com.heraizen"})
 public class TmsAppApplication implements CommandLineRunner {
 
+	// This is main method, spring boot execution starts from here
 	public static void main(String[] args) {
 		SpringApplication.run(TmsAppApplication.class, args);
 	}
