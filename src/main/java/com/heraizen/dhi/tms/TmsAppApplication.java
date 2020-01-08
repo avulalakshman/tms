@@ -14,7 +14,8 @@ public class TmsAppApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(TmsAppApplication.class, args);
 	}
-
+	
+	//This method is used to init the application
 	@Override
 	public void run(String... args) throws Exception {
 		
